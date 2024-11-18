@@ -59,7 +59,7 @@ func FileUploadMultipart(w http.ResponseWriter, r *http.Request) {
 	r.Body = http.MaxBytesReader(w, r.Body, maxUploadSize)
 
 	// Parse the multipart form
-	if err := r.ParseMultipartForm(maxUploadSize); err != nil {
+	if err := r.ParseMultipartForm(10 << 20); err != nil {
 		http.Error(w, "Failed to parse multipart form: "+err.Error(), http.StatusBadRequest)
 		return
 	}
